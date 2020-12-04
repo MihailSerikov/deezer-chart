@@ -1,0 +1,10 @@
+.carousel {
+  height: 600px !important;
+
+  :global {
+    .carousel-item {
+      width: 300px;
+      top: -160px;
+    }
+  }
+}

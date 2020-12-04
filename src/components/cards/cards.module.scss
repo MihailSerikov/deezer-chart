@@ -1,0 +1,25 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  :global {
+    .card-content {
+      flex: 1;
+    }
+
+    .card-title {
+      margin-top: 0;
+      line-height: 28px;
+      font-weight: 500;
+    }
+
+    .card-subtitle {
+      margin-top: 0;
+      font-weight: 500;
+    }
+  }
+}
+
+.tracklist {
+  padding-left: 16px;
+}
