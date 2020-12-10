@@ -17,11 +17,11 @@ const TracksList: React.FC<TracksListProps> = ({
   tracks,
   isCarousel,
 }) => {
-  const carouselEl: any = useRef();
+  const carouselEl: React.Ref<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
     if (isCarousel) {
-      M.Carousel.init(carouselEl.current, {
+      M.Carousel.init(carouselEl.current!, {
         dist: -30,
         padding: 60,
       });
