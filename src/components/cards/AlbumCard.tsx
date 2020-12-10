@@ -3,7 +3,7 @@ import { Album, Track } from '../../interfaces';
 import cx from 'classnames';
 import s from './cards.module.scss';
 import { api, apiBaseUrl } from '../../utils/api';
-import { AlbumTracklist } from '../AlbumTracklist';
+import { AlbumTrackList } from '../AlbumTrackList';
 import _ from 'lodash';
 
 interface AlbumCardProps {
@@ -81,11 +81,11 @@ const reducer = (state: ReducerState, action: Action) => {
 };
 
 export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
-  const cardRevealRef: any = useRef(null);
+  const cardRevealRef: React.Ref<HTMLDivElement> = useRef(null);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { tracklist, isLoading } = state;
 
-  const loadTracklist = async (url: string) => {
+  const loadTrackList = async (url: string) => {
     const fixedUrl = url.replace(apiBaseUrl, '');
 
     dispatch({
@@ -101,19 +101,19 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
     }
   };
 
-  const handleTracklistLoad = (tracklistUrl: string) => {
+  const handleTrackListLoad = (tracklistUrl: string) => {
     if (!tracklist.data.length) {
-      loadTracklist(tracklistUrl);
+      loadTrackList(tracklistUrl);
     }
   };
 
   const handleInfiniteScroll = _.debounce(() => {
-    let scrollTop = cardRevealRef.current.scrollTop;
+    let scrollTop = cardRevealRef.current!.scrollTop;
     let scrollHeight =
-      cardRevealRef.current.scrollHeight - cardRevealRef.current.clientHeight;
+      cardRevealRef.current!.scrollHeight - cardRevealRef.current!.clientHeight;
 
     if (scrollTop === scrollHeight && tracklist.next && !isLoading) {
-      loadTracklist(tracklist.next);
+      loadTrackList(tracklist.next);
     }
   }, 200);
 
@@ -122,7 +122,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
       <div className="card-image">
         <img src={album.cover} alt={album.title} />
         <button
-          onClick={() => handleTracklistLoad(album.tracklist)}
+          onClick={() => handleTrackListLoad(album.tracklist)}
           className="activator btn-floating halfway-fab waves-effect waves-light red"
         >
           <i className="material-icons">more_horiz</i>
@@ -139,7 +139,7 @@ export const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
         <span className="card-title grey-text text-darken-4">
           <i className="material-icons right">close</i>
         </span>
-        <AlbumTracklist isLoading={isLoading} tracklist={tracklist.data} />
+        <AlbumTrackList isLoading={isLoading} tracklist={tracklist.data} />
       </div>
       <div className="card-action">
         <a href="#">This is a link</a>
