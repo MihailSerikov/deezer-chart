@@ -31,7 +31,9 @@ export const TrackCard: React.FC<TrackCardProps> = ({ track }) => {
         </p>
       </div>
       <div className="card-action">
-        <a href="#">This is a link</a>
+        <a href={track.link} target="_blank" rel="noreferrer">
+          Listen on Deezer
+        </a>
       </div>
     </div>
   );

@@ -5,12 +5,12 @@ import s from '../styles/modules/track.module.scss';
 import { Preloader } from './Preloader';
 import { TrackPreview } from './TrackPreview';
 
-interface AlbumTrackListProps {
+interface TrackListProps {
   isLoading: boolean;
   tracklist: Track[];
 }
 
-export const AlbumTrackList: React.FC<AlbumTrackListProps> = ({
+export const TrackList: React.FC<TrackListProps> = ({
   isLoading,
   tracklist,
 }) => {

@@ -1,32 +1,32 @@
 import React, { useEffect, useRef } from 'react';
 import { FetchedInstance } from '../utils/api';
-import { Album } from '../interfaces';
-import { AlbumCard } from './cards';
+import { Artist } from '../interfaces';
+import ArtistCard from './cards/ArtistCard';
 import m from '../styles/modules/carousel.module.scss';
 import l from '../styles/layout/grid.module.scss';
 import cx from 'classnames';
 
-interface AlbumsListProps {
+interface ArtistsChartProps {
   title: string;
-  albums: FetchedInstance<Album>;
+  artists: FetchedInstance<Artist>;
   isCarousel: boolean;
 }
 
-const AlbumsList: React.FC<AlbumsListProps> = ({
+export const ArtistsChart: React.FC<ArtistsChartProps> = ({
   title,
-  albums,
+  artists,
   isCarousel,
 }) => {
   const carouselEl: React.Ref<HTMLDivElement> = useRef(null);
 
   useEffect(() => {
-    if (isCarousel) {
+    if (isCarousel && carouselEl) {
       M.Carousel.init(carouselEl.current!, {
         dist: -30,
         padding: 60,
       });
     }
-  }, [albums, isCarousel]);
+  }, [artists, isCarousel]);
 
   return (
     <div>
@@ -35,18 +35,16 @@ const AlbumsList: React.FC<AlbumsListProps> = ({
         ref={carouselEl}
         className={isCarousel ? cx(m.carousel, 'carousel') : l.cardsGrid}
       >
-        {albums.data.map(album =>
+        {artists.data.map(artist =>
           isCarousel ? (
-            <div key={album.id} className="carousel-item">
-              <AlbumCard album={album}></AlbumCard>
+            <div key={artist.id} className="carousel-item">
+              <ArtistCard artist={artist}></ArtistCard>
             </div>
           ) : (
-            <AlbumCard album={album}></AlbumCard>
+            <ArtistCard artist={artist}></ArtistCard>
           ),
         )}
       </div>
     </div>
   );
 };
-
-export default AlbumsList;

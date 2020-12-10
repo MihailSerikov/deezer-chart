@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { StoreState } from '../../../modules/reducers';
 import { isEmptyObject } from '../../../utils/helpers';
-import TracksList from '../../../components/TracksList';
-import AlbumsList from '../../../components/AlbumsList';
 import { Chart, fetchChart } from '../../../modules/chart/actions';
+import { AlbumsChart } from '../../../components/AlbumsChart';
+import { ArtistsChart } from '../../../components/ArtistsChart';
+import { TracksChart } from '../../../components/TracksChart';
 
 interface ChartProps {
   data: Chart;
@@ -23,10 +24,17 @@ const ChartPage = ({ data, fetchChart }: ChartProps) => {
     <>
       <h1 className="center-align">Chart</h1>
       {data.tracks?.data.length && (
-        <TracksList title="Top 10 Tracks" tracks={data.tracks} isCarousel />
+        <TracksChart title="Top 10 Tracks" tracks={data.tracks} isCarousel />
       )}
       {data.albums?.data.length && (
-        <AlbumsList title="Top 10 Albums" albums={data.albums} isCarousel />
+        <AlbumsChart title="Top 10 Albums" albums={data.albums} isCarousel />
+      )}
+      {data.artists?.data.length && (
+        <ArtistsChart
+          title="Top 10 Artists"
+          artists={data.artists}
+          isCarousel
+        />
       )}
     </>
   );

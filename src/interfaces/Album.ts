@@ -4,4 +4,5 @@ export interface Album {
   cover: string;
   cover_small: string;
   tracklist: string;
+  link: string;
 }

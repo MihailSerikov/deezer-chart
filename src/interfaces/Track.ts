@@ -7,4 +7,5 @@ export interface Track {
   preview: string;
   artist: Artist;
   album: Album;
+  link: string;
 }
