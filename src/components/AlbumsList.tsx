@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { FetchedInstance } from '../utils/api';
 import { Album } from '../interfaces';
-import { AlbumCard } from './cards';
+import AlbumCard from './cards/AlbumCard';
+
 import m from '../styles/modules/carousel.module.scss';
 import l from '../styles/layout/grid.module.scss';
 import cx from 'classnames';
