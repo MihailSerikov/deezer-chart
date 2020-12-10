@@ -4,4 +4,5 @@ export interface Artist {
   picture: string;
   picture_small: string;
   tracklist: string;
+  link: string;
 }

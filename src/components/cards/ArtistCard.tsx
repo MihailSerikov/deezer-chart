@@ -1,18 +1,18 @@
 import React, { useRef } from 'react';
-import { Album } from '../../interfaces';
-import { TrackList } from '../TrackList';
-import _ from 'lodash';
+import { Artist } from '../../interfaces';
 import { withTrackList, withTrackListProps } from '../HOC/withTrackList';
+import _ from 'lodash';
 
 import cx from 'classnames';
 import s from './cards.module.scss';
+import { TrackList } from '../TrackList';
 
-interface AlbumCardProps extends withTrackListProps {
-  album: Album;
+interface ArtistCardProps extends withTrackListProps {
+  artist: Artist;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({
-  album,
+const ArtistCard: React.FC<ArtistCardProps> = ({
+  artist,
   tracklist,
   isTracklistLoading,
   loadTrackList,
@@ -32,16 +32,16 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
   return (
     <div className={cx(s.card, 'card sticky-action')}>
       <div className="card-image">
-        <img src={album.cover} alt={album.title} />
+        <img src={artist.picture} alt={artist.picture} />
         <button
-          onClick={() => loadTrackList(album.tracklist)}
+          onClick={() => loadTrackList(artist.tracklist)}
           className="activator btn-floating halfway-fab waves-effect waves-light red"
         >
           <i className="material-icons">more_horiz</i>
         </button>
       </div>
       <div className="card-content">
-        <h5 className="card-title grey-text text-darken-4">{album.title}</h5>
+        <h5 className="card-title grey-text text-darken-4">{artist.name}</h5>
       </div>
       <div
         className="card-reveal"
@@ -54,7 +54,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
         <TrackList isLoading={isTracklistLoading} tracklist={tracklist.data} />
       </div>
       <div className="card-action">
-        <a href={album.link} target="_blank" rel="noreferrer">
+        <a href={artist.link} target="_blank" rel="noreferrer">
           Listen on Deezer
         </a>
       </div>
@@ -62,4 +62,4 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
   );
 };
 
-export default withTrackList(AlbumCard);
+export default withTrackList(ArtistCard);

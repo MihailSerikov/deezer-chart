@@ -4,4 +4,5 @@ export interface Podcast {
   available: boolean;
   picture: string;
   picture_small: string;
+  link: string;
 }

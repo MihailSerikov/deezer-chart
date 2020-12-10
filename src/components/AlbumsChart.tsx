@@ -7,13 +7,13 @@ import m from '../styles/modules/carousel.module.scss';
 import l from '../styles/layout/grid.module.scss';
 import cx from 'classnames';
 
-interface AlbumsListProps {
+interface AlbumsChartProps {
   title: string;
   albums: FetchedInstance<Album>;
   isCarousel: boolean;
 }
 
-const AlbumsList: React.FC<AlbumsListProps> = ({
+export const AlbumsChart: React.FC<AlbumsChartProps> = ({
   title,
   albums,
   isCarousel,
@@ -49,5 +49,3 @@ const AlbumsList: React.FC<AlbumsListProps> = ({
     </div>
   );
 };
-
-export default AlbumsList;
