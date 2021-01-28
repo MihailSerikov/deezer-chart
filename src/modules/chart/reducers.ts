@@ -25,8 +25,6 @@ export const chartReducer = (state = initialState, action: ChartAction) => {
       };
     case FETCH_CHART.FAIL:
       return { ...state, isLoading: false, error: action.payload };
-    // case ActionTypes.fetchAlbumTracks:
-    //   return action.payload;
     default:
       return state;
   }

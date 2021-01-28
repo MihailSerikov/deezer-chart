@@ -19,6 +19,12 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
 }) => {
   const cardRevealRef: React.Ref<HTMLDivElement> = useRef(null);
 
+  const handleTrackListLoad = () => {
+    if (!tracklist.data.length) {
+      loadTrackList(album.tracklist);
+    }
+  };
+
   const handleInfiniteScroll = _.debounce(() => {
     let scrollTop = cardRevealRef.current!.scrollTop;
     let scrollHeight =
@@ -34,7 +40,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({
       <div className="card-image">
         <img src={album.cover} alt={album.title} />
         <button
-          onClick={() => loadTrackList(album.tracklist)}
+          onClick={handleTrackListLoad}
           className="activator btn-floating halfway-fab waves-effect waves-light red"
         >
           <i className="material-icons">more_horiz</i>

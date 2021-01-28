@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Track } from '../interfaces';
 import cx from 'classnames';
+import { useAudioPlayer } from './useAudioPlayer';
 
 import s from '../styles/modules/track.module.scss';
 
@@ -9,24 +10,16 @@ interface TrackPreviewProps {
 }
 
 export const TrackPreview: React.FC<TrackPreviewProps> = ({ track }) => {
-  const trackPlayer: React.Ref<HTMLAudioElement> = useRef(null);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handlePlayTrackPreview = () => {
-    setIsPlaying(!isPlaying);
-    isPlaying ? trackPlayer.current!.pause() : trackPlayer.current!.play();
-  };
+  const [playing, toggleAudioPlayer] = useAudioPlayer(track.preview);
 
   return (
-    <div className={s.trackPreview} onClick={handlePlayTrackPreview}>
+    <div className={s.trackPreview} onClick={toggleAudioPlayer}>
       <span className={s.trackPreview__title}>{track.title}</span>
       <button className={cx(s.trackPreview__btn, 'btn-floating btn-small')}>
         <i className="material-icons right">
-          {isPlaying ? 'pause' : 'play_arrow'}
+          {playing ? 'pause' : 'play_arrow'}
         </i>
       </button>
-      <audio hidden ref={trackPlayer} controls src={track.preview}></audio>
     </div>
   );
 };

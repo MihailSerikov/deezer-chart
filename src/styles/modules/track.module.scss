@@ -11,6 +11,7 @@
 .trackPreview {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 
   &__title {
     padding-top: 5px;

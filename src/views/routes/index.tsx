@@ -1,12 +1,12 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import Chart from '../pages/chart/Chart';
 
 export const App = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <h1>Hi</h1>
+        <Redirect to="/chart" />
       </Route>
       <Route exact path="/chart" component={Chart} />
       <Route exact path="/songs">
