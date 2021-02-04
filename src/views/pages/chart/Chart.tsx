@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { StoreState } from '../../../modules/reducers';
 import { isEmptyObject } from '../../../utils/helpers';
-import { Chart, fetchChart } from '../../../modules/chart/actions';
+import { fetchChart } from '../../../modules/chart/actions';
 import { AlbumsChart } from '../../../components/AlbumsChart';
 import { ArtistsChart } from '../../../components/ArtistsChart';
 import { TracksChart } from '../../../components/TracksChart';
+import { Chart } from '../../../modules/chart/types';
 
 interface ChartProps {
   data: Chart;

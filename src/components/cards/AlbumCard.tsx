@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Album } from '../../interfaces';
 import { TrackList } from '../TrackList';
 import _ from 'lodash';
-import { withTrackList, withTrackListProps } from '../HOC/withTrackList';
+import { withTrackList, withTrackListProps } from '../HOC/withTrackList/';
 
 import cx from 'classnames';
 import s from './cards.module.scss';

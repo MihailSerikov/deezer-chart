@@ -1,35 +1,38 @@
 import { Dispatch } from 'redux';
-import { Podcast } from '../../interfaces/Podcast';
-import { api, createApiAction, FetchedInstance } from '../../utils/api';
+import { api } from '../../utils/api';
 
-import { Album, Artist, Playlist, Track } from '../../interfaces';
+import { Chart } from './types';
 
-export interface Chart {
-  tracks?: FetchedInstance<Track>;
-  albums?: FetchedInstance<Album>;
-  artists?: FetchedInstance<Artist>;
-  playlists?: FetchedInstance<Playlist>;
-  podcasts?: FetchedInstance<Podcast>;
+export enum CHART_API_ACTIONS {
+  REQUEST = 'CHART_LOAD / REQUEST',
+  SUCCESS = 'CHART_LOAD / SUCCESS',
+  FAIL = 'CHART_LOAD / FAIL',
+}
+export interface RequestChartAction {
+  type: CHART_API_ACTIONS.REQUEST;
 }
 
-export interface FetchChartAction {
-  type: string;
+export interface SuccessChartAction {
+  type: CHART_API_ACTIONS.SUCCESS;
   payload: Chart;
 }
 
-export const FETCH_CHART = createApiAction('CHART_LOAD');
+export interface ErrorChartAction {
+  type: CHART_API_ACTIONS.FAIL;
+  payload: Error;
+}
 
-export const startFetchChart = () => ({
-  type: FETCH_CHART.REQUEST,
+export const startFetchChart = (): RequestChartAction => ({
+  type: CHART_API_ACTIONS.REQUEST,
 });
 
-export const finishFetchChart = (data: Chart) => ({
-  type: FETCH_CHART.SUCCESS,
+export const successFetchChart = (data: Chart): SuccessChartAction => ({
+  type: CHART_API_ACTIONS.SUCCESS,
   payload: data,
 });
 
-export const failFetchChart = (error: Error) => ({
-  type: FETCH_CHART.FAIL,
+export const failFetchChart = (error: Error): ErrorChartAction => ({
+  type: CHART_API_ACTIONS.FAIL,
   payload: error,
 });
 
@@ -39,7 +42,7 @@ export const fetchChart = () => async (dispatch: Dispatch) => {
   try {
     const { data }: { data: Chart } = await api.get<Chart>('/chart');
 
-    dispatch<FetchChartAction>(finishFetchChart(data));
+    dispatch(successFetchChart(data));
   } catch (err) {
     dispatch(failFetchChart(err));
   }

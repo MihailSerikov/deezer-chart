@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Artist } from '../../interfaces';
-import { withTrackList, withTrackListProps } from '../HOC/withTrackList';
+import { withTrackList, withTrackListProps } from '../HOC/withTrackList/';
 import _ from 'lodash';
 
 import cx from 'classnames';

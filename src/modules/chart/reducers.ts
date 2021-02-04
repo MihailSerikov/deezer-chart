@@ -1,5 +1,5 @@
-import { Chart, FETCH_CHART } from './actions';
-import { ChartAction } from './types';
+import { CHART_API_ACTIONS } from './actions';
+import { Chart, ChartAction } from './types';
 
 export interface ChartState {
   data: Chart;
@@ -13,17 +13,20 @@ const initialState: ChartState = {
   error: null,
 };
 
-export const chartReducer = (state = initialState, action: ChartAction) => {
+export const chartReducer = (
+  state: ChartState = initialState,
+  action: ChartAction,
+) => {
   switch (action.type) {
-    case FETCH_CHART.REQUEST:
+    case CHART_API_ACTIONS.REQUEST:
       return { ...state, isLoading: true };
-    case FETCH_CHART.SUCCESS:
+    case CHART_API_ACTIONS.SUCCESS:
       return {
         data: action.payload,
         isLoading: false,
         error: null,
       };
-    case FETCH_CHART.FAIL:
+    case CHART_API_ACTIONS.FAIL:
       return { ...state, isLoading: false, error: action.payload };
     default:
       return state;
